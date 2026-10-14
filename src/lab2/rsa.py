@@ -12,8 +12,14 @@ def is_prime(n: int) -> bool:
     >>> is_prime(8)
     False
     """
-    # PUT YOUR CODE HERE
-    pass
+    if n < 2:
+        return False
+
+    for i in range(2,n):
+        if n%i==0:
+            return False
+
+    return True
 
 
 def gcd(a: int, b: int) -> int:
@@ -24,8 +30,10 @@ def gcd(a: int, b: int) -> int:
     >>> gcd(3, 7)
     1
     """
-    # PUT YOUR CODE HERE
-    pass
+    while b != 0:
+        a, b = b, a % b
+
+    return a
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
@@ -35,8 +43,18 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     >>> multiplicative_inverse(7, 40)
     23
     """
-    # PUT YOUR CODE HERE
-    pass
+    old_r, r = e, phi
+    old_s, s = 1, 0
+
+    while r != 0:
+        quotient = old_r // r
+        old_r, r = r, old_r - quotient * r
+        old_s, s = s, old_s - quotient * s
+
+    if old_r != 1:
+        raise ValueError("The inverse does not exist.")
+
+    return old_s % phi
 
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
@@ -46,10 +64,10 @@ def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[in
         raise ValueError("p and q cannot be equal")
 
     # n = pq
-    # PUT YOUR CODE HERE
+    n = p * q
 
     # phi = (p-1)(q-1)
-    # PUT YOUR CODE HERE
+    phi = (p - 1) * (q - 1)
 
     # Choose an integer e such that e and phi(n) are coprime
     e = random.randrange(1, phi)
@@ -101,3 +119,24 @@ if __name__ == "__main__":
     print("Decrypting message with public key ", public, " . . .")
     print("Your message is:")
     print(decrypt(public, encrypted_msg))
+
+
+
+    p = 61
+    q = 53
+
+    public_key, private_key = generate_keypair(p, q)
+
+    message = 65
+
+    e, n = public_key
+    d, n = private_key
+
+    encrypted = pow(message, e, n)
+    decrypted = pow(encrypted, d, n)
+
+    # print("Открытый ключ:", public_key)
+    # print("Закрытый ключ:", private_key)
+    # print("Исходное сообщение:", message)
+    # print("Зашифрованное сообщение:", encrypted)
+    # print("Расшифрованное сообщение:", decrypted)
