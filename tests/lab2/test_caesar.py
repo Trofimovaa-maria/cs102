@@ -1,6 +1,6 @@
 import unittest
 
-from src.lab2.caesar import encrypt_caesar, decrypt_caesar
+from src.lab2.caesar import decrypt_caesar, encrypt_caesar
 
 
 class CaesarTestCase(unittest.TestCase):
@@ -44,7 +44,7 @@ class CaesarTestCase(unittest.TestCase):
         """Строка без букв не изменяется."""
         self.assertEqual(encrypt_caesar("123!@#"), "123!@#")
 
-    '''decrypt_caesar'''
+    """decrypt_caesar"""
 
     def test_decrypt_upper(self):
         """Расшифровывает заглавные буквы."""

@@ -1,12 +1,12 @@
 import unittest
 
-from src.lab2.vigenre import encrypt_vigenere, decrypt_vigenere
+from src.lab2.vigenre import decrypt_vigenere, encrypt_vigenere
 
 
 class VigenereTestCase(unittest.TestCase):
     """Тесты для функций шифра Виженера."""
 
-    '''encrypt_vigenere'''
+    """encrypt_vigenere"""
 
     def test_encrypt_key_a(self):
         """Ключ A не меняет заглавные буквы."""
@@ -55,9 +55,9 @@ class VigenereTestCase(unittest.TestCase):
     def test_encrypt_key_shorter_than_text(self):
         """Ключ повторяется, если он короче текста."""
         # LEMON → LEMONLEMONLE для ATTACKATDAWN
-        self.assertEqual(encrypt_vigenere("ATTACKATDAWN", "LEMON"),"LXFOPVEFRNHR")
+        self.assertEqual(encrypt_vigenere("ATTACKATDAWN", "LEMON"), "LXFOPVEFRNHR")
 
-    '''decrypt_vigenere'''
+    """decrypt_vigenere"""
 
     def test_decrypt_key_a(self):
         """Ключ A ничего не меняет."""
@@ -92,19 +92,25 @@ class VigenereTestCase(unittest.TestCase):
         """Шифрование + расшифровка = исходный текст."""
         text = "Hello, World!"
         keyword = "KEY"
-        self.assertEqual(decrypt_vigenere(encrypt_vigenere(text, keyword), keyword),text)
+        self.assertEqual(
+            decrypt_vigenere(encrypt_vigenere(text, keyword), keyword), text
+        )
 
     def test_encrypt_then_decrypt_long(self):
         """То же с длинным текстом и ключом."""
         text = "The quick brown fox jumps over the lazy dog"
         keyword = "SECRET"
-        self.assertEqual(decrypt_vigenere(encrypt_vigenere(text, keyword), keyword),text)
+        self.assertEqual(
+            decrypt_vigenere(encrypt_vigenere(text, keyword), keyword), text
+        )
 
     def test_encrypt_then_decrypt_with_punctuation(self):
         """Смешанный текст с пробелами, цифрами и знаками."""
         text = "Attack at dawn! 42 times."
         keyword = "LEMON"
-        self.assertEqual(decrypt_vigenere(encrypt_vigenere(text, keyword), keyword),text)
+        self.assertEqual(
+            decrypt_vigenere(encrypt_vigenere(text, keyword), keyword), text
+        )
 
 
 if __name__ == "__main__":

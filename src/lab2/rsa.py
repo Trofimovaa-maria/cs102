@@ -1,5 +1,5 @@
 import random
-from typing import Tuple, List
+from typing import List, Tuple
 
 
 def is_prime(n: int) -> bool:
@@ -15,8 +15,8 @@ def is_prime(n: int) -> bool:
     if n < 2:
         return False
 
-    for i in range(2,n):
-        if n%i==0:
+    for i in range(2, n):
+        if n % i == 0:
             return False
 
     return True
@@ -86,7 +86,9 @@ def generate_keypair(p: int, q: int) -> Tuple[Tuple[int, int], Tuple[int, int]]:
     return ((e, n), (d, n))
 
 
-def encrypt(pk: Tuple[int, int], plaintext: str) -> List[int]:    # Unpack the key into its components
+def encrypt(
+    pk: Tuple[int, int], plaintext: str
+) -> List[int]:  # Unpack the key into its components
     key, n = pk
     # Convert each letter in the plaintext to numbers based on
     # the character using a^b mod m
@@ -99,8 +101,6 @@ def decrypt(pk: Tuple[int, int], ciphertext: List[int]) -> str:
     # Unpack the key into its components
     key, n = pk
     # Generate the plaintext based on the ciphertext and key using a^b mod m
-    plain = [chr((char ** key) % n) for char in ciphertext]
+    plain = [chr((char**key) % n) for char in ciphertext]
     # Return the array of bytes as a string
     return "".join(plain)
-
-

@@ -1,12 +1,12 @@
 import unittest
 
-from src.lab2.rsa import (is_prime,gcd,multiplicative_inverse,generate_keypair)
+from src.lab2.rsa import gcd, generate_keypair, is_prime, multiplicative_inverse
 
 
 class RSATestCase(unittest.TestCase):
     """Тесты для функций RSA."""
 
-    '''is_prime'''
+    """is_prime"""
 
     def test_is_prime_two(self):
         """2 — простое число."""
@@ -44,7 +44,7 @@ class RSATestCase(unittest.TestCase):
             with self.subTest(n=n):
                 self.assertFalse(is_prime(n))
 
-    '''gcd'''
+    """gcd"""
 
     def test_gcd_basic(self):
         """Классические примеры из doctest."""
@@ -71,7 +71,7 @@ class RSATestCase(unittest.TestCase):
         self.assertEqual(gcd(48, 18), 6)
         self.assertEqual(gcd(100, 75), 25)
 
-    '''multiplicative_inverse'''
+    """multiplicative_inverse"""
 
     def test_multiplicative_inverse_doc(self):
         """Пример из doctest: 7 * 23 mod 40 = 1."""
@@ -91,7 +91,7 @@ class RSATestCase(unittest.TestCase):
                 d = multiplicative_inverse(e, phi)
                 self.assertEqual((e * d) % phi, 1)
 
-    '''generate_keypair'''
+    """generate_keypair"""
 
     def test_generate_keypair_n_equals_pq(self):
         """n = p * q."""
