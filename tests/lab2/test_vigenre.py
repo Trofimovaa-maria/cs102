@@ -48,13 +48,13 @@ class VigenereTestCase(unittest.TestCase):
         self.assertEqual(encrypt_vigenere("Attack", "LEMON"), "Lxfopv")
 
     def test_encrypt_wrap_around(self):
-        """Сдвиг переходит через Z → A."""
+        """Сдвиг переходит через Z -> A."""
         # X + D(3) = A, Y + D = B, Z + D = C
         self.assertEqual(encrypt_vigenere("XYZ", "D"), "ABC")
 
     def test_encrypt_key_shorter_than_text(self):
         """Ключ повторяется, если он короче текста."""
-        # LEMON → LEMONLEMONLE для ATTACKATDAWN
+        # LEMON -> LEMONLEMONLE для ATTACKATDAWN
         self.assertEqual(encrypt_vigenere("ATTACKATDAWN", "LEMON"), "LXFOPVEFRNHR")
 
     """decrypt_vigenere"""
