@@ -43,13 +43,12 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
             plaintext += char
 
     return plaintext
-    return plaintext
 
+if __name__ == "__main__":
+    print(encrypt_caesar("PYTHON"))
+    print(encrypt_caesar("python"))
+    print(encrypt_caesar("Python3.6"))
 
-print(encrypt_caesar("PYTHON"))
-print(encrypt_caesar("python"))
-print(encrypt_caesar("Python3.6"))
-
-print(decrypt_caesar("SBWKRQ"))
-print(decrypt_caesar("sbwkrq"))
-print(decrypt_caesar("Sbwkrq3.6"))
+    print(decrypt_caesar("SBWKRQ"))
+    print(decrypt_caesar("sbwkrq"))
+    print(decrypt_caesar("Sbwkrq3.6"))

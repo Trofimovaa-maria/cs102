@@ -59,12 +59,12 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
             plaintext += char
 
     return plaintext
+if __name__ == "__main__":
+    print(encrypt_vigenere("PYTHON", "A"))
+    print(encrypt_vigenere("python", "a"))
+    print(encrypt_vigenere("ATTACKATDAWN", "LEMON"))
 
-# print(encrypt_vigenere("PYTHON", "A"))
-# print(encrypt_vigenere("python", "a"))
-# print(encrypt_vigenere("ATTACKATDAWN", "LEMON"))
-#
-#
-# print(decrypt_vigenere("PYTHON", "A"))
-# print(decrypt_vigenere("python", "a"))
-# print(decrypt_vigenere("LXFOPVEFRNHR", "LEMON"))
+
+    print(decrypt_vigenere("PYTHON", "A"))
+    print(decrypt_vigenere("python", "a"))
+    print(decrypt_vigenere("LXFOPVEFRNHR", "LEMON"))

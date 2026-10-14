@@ -1,5 +1,5 @@
 import random
-import typing as tp
+from typing import Tuple, List
 
 
 def is_prime(n: int) -> bool:
@@ -57,7 +57,7 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     return old_s % phi
 
 
-def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
+def generate_keypair(p: int, q: int) -> Tuple[Tuple[int, int], Tuple[int, int]]:
     if not (is_prime(p) and is_prime(q)):
         raise ValueError("Both numbers must be prime.")
     elif p == q:
@@ -86,8 +86,7 @@ def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[in
     return ((e, n), (d, n))
 
 
-def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
-    # Unpack the key into it's components
+def encrypt(pk: Tuple[int, int], plaintext: str) -> List[int]:    # Unpack the key into its components
     key, n = pk
     # Convert each letter in the plaintext to numbers based on
     # the character using a^b mod m
@@ -96,7 +95,7 @@ def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
     return cipher
 
 
-def decrypt(pk: tp.Tuple[int, int], ciphertext: tp.List[int]) -> str:
+def decrypt(pk: Tuple[int, int], ciphertext: List[int]) -> str:
     # Unpack the key into its components
     key, n = pk
     # Generate the plaintext based on the ciphertext and key using a^b mod m
@@ -105,38 +104,3 @@ def decrypt(pk: tp.Tuple[int, int], ciphertext: tp.List[int]) -> str:
     return "".join(plain)
 
 
-if __name__ == "__main__":
-    print("RSA Encrypter/ Decrypter")
-    p = int(input("Enter a prime number (17, 19, 23, etc): "))
-    q = int(input("Enter another prime number (Not one you entered above): "))
-    print("Generating your public/private keypairs now . . .")
-    public, private = generate_keypair(p, q)
-    print("Your public key is ", public, " and your private key is ", private)
-    message = input("Enter a message to encrypt with your private key: ")
-    encrypted_msg = encrypt(private, message)
-    print("Your encrypted message is: ")
-    print("".join(map(lambda x: str(x), encrypted_msg)))
-    print("Decrypting message with public key ", public, " . . .")
-    print("Your message is:")
-    print(decrypt(public, encrypted_msg))
-
-
-
-    p = 61
-    q = 53
-
-    public_key, private_key = generate_keypair(p, q)
-
-    message = 65
-
-    e, n = public_key
-    d, n = private_key
-
-    encrypted = pow(message, e, n)
-    decrypted = pow(encrypted, d, n)
-
-    # print("Открытый ключ:", public_key)
-    # print("Закрытый ключ:", private_key)
-    # print("Исходное сообщение:", message)
-    # print("Зашифрованное сообщение:", encrypted)
-    # print("Расшифрованное сообщение:", decrypted)
