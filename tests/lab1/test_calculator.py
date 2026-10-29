@@ -26,8 +26,13 @@ class CalculatorTestCase(unittest.TestCase):
         calc = Calculator()
         self.assertEqual(calc.divide(10, 2), 5)
 
+    # Тест для проверки работы, можно удалить
+    def test_one(self):
+        self.assertEqual(1, 1)
+
     def test_divide_by_zero(self):
         """Проверяет, что деление на ноль возбуждает ошибку."""
         calc = Calculator()
         with self.assertRaises(ZeroDivisionError):
             calc.divide(5, 0)
+

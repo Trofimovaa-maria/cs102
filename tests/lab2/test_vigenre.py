@@ -86,7 +86,7 @@ class VigenereTestCase(unittest.TestCase):
         """Регистр сохраняется при расшифровке."""
         self.assertEqual(decrypt_vigenere("Lxfopv", "LEMON"), "Attack")
 
-    # ---------- Взаимная проверка ----------
+    """Взаимная проверка"""
 
     def test_encrypt_then_decrypt(self):
         """Шифрование + расшифровка = исходный текст."""
