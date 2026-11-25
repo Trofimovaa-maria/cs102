@@ -1,5 +1,5 @@
 import typing as tp
-
+import os
 
 class Movie:
     """Класс для хранения информации о фильме."""
@@ -172,4 +172,56 @@ class RecommendationSystem:
 
         return self.get_movie_by_id(movie_id)
 
+
+def read_movies(filename):
+    movies = []
+
+    with open(filename, "r", encoding="utf-8") as file:
+        for line in file:
+            line = line.strip()
+
+            if not line:
+                continue
+
+            movie_id, title = line.split(",", 1)
+            movies.append(Movie(int(movie_id), title))
+
+    return movies
+
+
+def read_users(filename):
+    users = []
+
+    with open(filename, "r", encoding="utf-8") as file:
+        for user_id, line in enumerate(file, start=1):
+            line = line.strip()
+
+            if not line:
+                continue
+
+            watched_movies = [int(x.strip()) for x in line.split(",")]
+            users.append(User(user_id, watched_movies))
+
+    return users
+
+
+if __name__ == "__main__":
+    base_dir = os.path.dirname(__file__)
+
+    movies = read_movies(os.path.join(base_dir, "movies.txt"))
+    users = read_users(os.path.join(base_dir, "users_history.txt"))
+
+    system = RecommendationSystem(movies, users)
+
+    watched = input("Введите ID просмотренных фильмов: ")
+    watched_movies = [int(x.strip()) for x in watched.split(",")]
+
+    current_user = User(0, watched_movies)
+
+    recommendation = system.recommend_movie(current_user, users)
+
+    if recommendation is None:
+        print("Рекомендация не найдена")
+    else:
+        print(recommendation.title)
 
